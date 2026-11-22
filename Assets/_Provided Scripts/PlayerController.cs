@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     private void Jump()
     {
+        if (PauseManager.paused)
+            return;
+
         // Get current time
         float currentTime = Time.time;
 
@@ -164,6 +167,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     private void Sprint() //new//
     {
+        if (PauseManager.paused)
+            return;
+
         float movementInput = playerControls.Travel.Move.ReadValue<float>();
         if (movementInput != 0 && IsGrounded())
         {
@@ -180,6 +186,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     private void SprintEnd() //new//
     {
+        if (PauseManager.paused)
+            return;
+
         float movementInput = playerControls.Travel.Move.ReadValue<float>();
         if (movementInput == 0 && IsGrounded())
         {
@@ -203,6 +212,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
+        if (PauseManager.paused)
+            return;
+
         CheckForLedge(); //checks for ledge
 
         // Check for Interact2 input to initiate climb (ledge grab)
@@ -272,8 +284,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             Debug.Log("Interact5");
         }
-
-        if (PauseManager.paused) return;
 
         if (DialogueManager.GetInstance().dialogueIsPlaying)
         {
